@@ -743,9 +743,15 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+.formButton {
+  cursor: pointer;
+}
+
 .formButtonActive {
   background-color: #00cc66;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .flex {
