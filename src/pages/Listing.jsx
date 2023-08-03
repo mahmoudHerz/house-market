@@ -37,7 +37,6 @@ function Listing() {
     fetchListing();
   }, [navigate, params.listingId]);
 
-  console.log(listing);
   if (loading) {
     return <Spinner />;
   }

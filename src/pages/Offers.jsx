@@ -58,7 +58,7 @@ function Offers() {
   }, []);
 
   // Pagination / Load More
-  const onFetchMoreListings = async () => {
+  const handleLoadMoreClick = async () => {
     try {
       // Get reference
       const listingsRef = collection(db, "listings");
@@ -94,15 +94,15 @@ function Offers() {
     }
   };
 
+  if (loading) return <Spinner />;
+
   return (
     <div className="category">
       <header>
         <p className="pageHeader">Offers</p>
       </header>
 
-      {loading ? (
-        <Spinner />
-      ) : listings && listings.length > 0 ? (
+      {listings && listings.length > 0 ? (
         <>
           <main>
             <ul className="categoryListings">
@@ -117,9 +117,9 @@ function Offers() {
           </main>
 
           <br />
-          <br />
-          {lastFetchedListing && (
-            <p className="loadMore" onClick={onFetchMoreListings}>
+
+          {listings.length > 10 && (
+            <p className="loadMore" onClick={handleLoadMoreClick}>
               Load More
             </p>
           )}

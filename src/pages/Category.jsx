@@ -17,7 +17,8 @@ import ListingItem from "../components/ListingItem";
 function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log("mahmoud");
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
+
   const params = useParams();
 
   useEffect(() => {
@@ -36,6 +37,10 @@ function Category() {
 
         // Execure query
         const querySnap = await getDocs(q);
+
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchedListing(lastVisible);
+
         const listingsQuery = [];
         querySnap.forEach((doc) => {
           return listingsQuery.push({ id: doc.id, data: doc.data() });
@@ -50,6 +55,43 @@ function Category() {
     fetchListings();
   }, [params.categoryName]);
 
+  const handleLoadMoreClick = async () => {
+    try {
+      // Get reference
+      const listingsRef = collection(db, "listings");
+
+      // Create a query
+      const q = query(
+        listingsRef,
+        where("type", "==", params.categoryName),
+        orderBy("timestamp", "desc"),
+        startAfter(lastFetchedListing),
+        limit(10)
+      );
+
+      // Execute query
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchedListing(lastVisible);
+
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings((prevState) => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      toast.error("Could not fetch listings");
+    }
+  };
+
+  if (loading) return <Spinner />;
   return (
     <div className="category">
       <header>
@@ -59,7 +101,6 @@ function Category() {
             : "Places for sale"}
         </p>
       </header>
-      {loading && <Spinner />}
       {listings && listings.length > 0 ? (
         <>
           <main>
@@ -73,6 +114,13 @@ function Category() {
               ))}
             </ul>
           </main>
+
+          <br />
+          {listings.length > 10 && (
+            <p className="loadMore" onClick={handleLoadMoreClick}>
+              Load More
+            </p>
+          )}
         </>
       ) : (
         <p>No listings for {params.categoryName}</p>

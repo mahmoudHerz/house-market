@@ -12,6 +12,9 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #f2f4f8;
   margin: 0;
+  /* margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px; */
 }
 
 a {
@@ -442,25 +445,37 @@ button {
 
 .categoryListingLocation {
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   opacity: 0.8;
   margin-bottom: 0;
 }
 
 .categoryListingName {
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   margin: 0;
 }
 
 .categoryListingPrice {
   margin-top: 0.5rem;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   color: #00cc66;
   margin-bottom: 0;
   display: flex;
   align-items: center;
+}
+
+@media (min-width: 500px) {
+  .categoryListingLocation {
+    font-size: 0.7rem;
+  }
+  .categoryListingName {
+    font-size: 1.25rem;
+  }
+  .categoryListingPrice {
+    font-size: 1.1rem;
+  }
 }
 
 .categoryListingInfoDiv {
@@ -712,7 +727,7 @@ button {
   font-weight: 600;
 }
 
-.lisitingsList {
+.listingsList {
   padding: 0;
 }
 

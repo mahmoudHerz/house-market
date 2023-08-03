@@ -27,6 +27,7 @@ function Profile() {
 
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState(null);
+
   const [changeDetails, setChangeDetails] = useState(false);
   const [formData, setFormData] = useState({
     name: auth.currentUser?.displayName,
