@@ -753,10 +753,10 @@ button {
   font-weight: 600;
   border-radius: 1rem;
   font-size: 1rem;
-  margin: 0.5rem 0.5rem 0 0;
-  display: flex;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .formButton {
@@ -771,6 +771,12 @@ button {
 
 .flex {
   display: flex;
+}
+
+@media (max-width: 500px) {
+  .formLatLng.flex {
+    display: block;
+  }
 }
 
 .formInput,
@@ -830,7 +836,7 @@ button {
 }
 
 .createListingButton {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .offers {
