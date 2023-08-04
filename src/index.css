@@ -632,6 +632,7 @@ button {
 
 .profile {
   margin-bottom: 10rem;
+  overflow-x: hidden;
 }
 
 .profileHeader {
@@ -776,6 +777,14 @@ button {
 @media (max-width: 500px) {
   .formLatLng.flex {
     display: block;
+  }
+
+  .formRooms {
+    width: 90%;
+    max-width: 326px;
+  }
+  .formRooms .formInputSmall {
+    width: 50%;
   }
 }
 
